@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tags 
+	tags_splitter="\|" prefdir="-" dictionary_loc="sentiment_dictinary.txt" dictionary_spliter=":">
+	
+	<tag imp="true">
+		<name>ADJ</name>
+	</tag>
+	<tag ingroupcount="1" imp="true">
+		<name>ADV</name>
+		<groups dir="+" count="1" opt="*">ADJ</groups>
+	</tag>
+	<tag imp="true">
+		<name>V_PA</name>
+		<groups dir="-" count="-1" opt="*"/>
+	</tag>
+	<tag imp="true">
+		<name>V_PR</name>
+		<groups dir="-" count="-1" opt="*"/>
+	</tag>
+	<tag>
+		<name>ADJ_SAZ_PA</name>
+		<joinsto dir="-">ADJ</joinsto>
+	</tag>
+	<tag>
+		<name>ADJ_SAZ_PI</name>
+		<joinsto dir="+">ADJ</joinsto>
+	</tag>
+	<tag imp="true">
+		<name>V_PI</name>	
+		<!--<joinsto dir="+">V_PA</joinsto>
+		<joinsto dir="+">V_PR</joinsto>-->
+	</tag>
+	<tag>
+		<name>V_PIO</name>
+		<joinsto dir="+" gap=" ">V_PA</joinsto>
+		<joinsto dir="+" gap=" ">V_PR</joinsto>
+	</tag>
+	<tag imp="true">
+		<name>CON</name>
+		<groups dir="+" count="-1" opt="*"/>
+	</tag>
+	<tag>
+		<name>ADJ_PI</name>
+		<joinsto dir="+">ADJ</joinsto>
+	</tag>
+	<tag>
+		<name>ADJ_PA</name>
+		<joinsto dir="-">ADJ</joinsto>
+	</tag>
+	<tag>
+		<name>PRO</name>
+	</tag>
+	<tag>
+		<name>PO</name>
+	</tag>
+	<tag>
+		<name>N</name>
+	</tag>
+</tags>
