@@ -199,39 +199,53 @@ The sentiment lexicon is one of the crucial resources for most sentiment analysi
 Because of the lack of sentiment lexicon in Persian, a sentiment lexicon which contains of 3400
 Persian words including adjectives, adverbs, negotiating words and others with their scores was
 generated.Finally with the help of our generated lexicon, proposed system calculates score of each
-group. The addition and multiplication operators are defined for each group. Then, recursively
-begins to calculate the sentiment degree of whole document by sum up all scores.
+group. The addition and multiplication operators are defined for each group.
+
+Then, recursively begins to calculate the sentiment degree of whole document by sum up all scores.
 Finally verb prepositions combined with verbs and conjunctions, classified their front words.
-Hence, the words inside categories added together and multiplied by their root word. If the
-categories are placed inside other categories, their values will be added together and multiplied
-again by the score of root. This way, we have the final strength and polarity of the corresponding
+Hence, the words inside categories added together and multiplied by their root word. 
+
+If the categories are placed inside other categories, their values will be added together and multiplied
+again by the score of root. 
+
+This way, we have the final strength and polarity of the corresponding
 groups and at the end, by multiplying to the ultimate root, the final polarity and sentiment score
 of the whole sentence will be calculated and a sentence with many positive adjectives and a
 negative verb would not cause a positive result.
+
 Now that the software has calculated the sentiment of all the sentences, it’ll add up all the scores
 to calculate ultimate sentiment result of a comment in a map reduce paradigm.
+
 Trained model, Xml based rules, the sentiment lexicon and the input file passed to the
 SentiMarker4 to calculate final score of each comment.
 
 In order to have a closer look at the results, we show analyzing process of one of the sentences
 from our input data.
+```
 [ ‫خخخخخ‬
 ٠٨:٥٤ | ٠٥ / ٠٤ / ١٣٩٣ ] ‫ترین‬ ‫بد‬ ‫بوسنی‬ ‫مقابل‬ ‫در‬ ‫ولی‬ ‫درخشید‬ ‫خوب‬ ‫خیلی‬ ‫ارزانتین‬ ‫با‬ ‫دربازی‬ ‫ایران‬
 ‫ببازد‬ ‫ایران‬ ‫نمیکرد‬ ‫باور‬ ‫کس‬ ‫ھیچ‬ ‫اصلا‬ ‫کھ‬ ‫تیمی‬ ‫مقابل‬ ‫در‬ ‫داشت‬ ‫رو‬ ‫بازی‬
 ‫بودحد‬ ‫فشرده‬ ‫ما‬ ‫امتحانی‬ ‫برنامھ‬ ‫زیرا‬ ‫داشتیم‬ ‫رو‬ ‫شرایط‬ ‫ترین‬ ‫سخت‬ ‫جھانی‬ ‫جام‬ ‫این‬ ‫خاطر‬ ‫بھ‬ ‫ایران‬ ‫اموزان‬ ‫دانش‬ ‫ی‬ ‫وھمھ‬ ‫من‬
 ‫باشید‬ ‫سلامت‬ ‫ھمیشھ‬ ‫انشاءالله‬ ‫اوردین‬ ‫می‬ ‫خوب‬ ‫نتیجھ‬ ‫یھ‬ ‫اقل‬
 ‫سلامتیشون‬ ‫بھ‬ ‫ھامون‬ ‫والیبالی‬ .... ‫فقط‬ ... ‫فقط‬ .... ‫فقط‬
+```
 In the given sentences, user “‫”خخخخخ‬ at the given time commented about Iran versus Bosnia
 FIFA World cup 2014.
+
 Given comment in Persian is roughly translated to English as following:
-Iran is very well played against Argentina but had the worst performance against Bosnia. Against
-a team that no one could believe to lose, students had been in the worst situation because of their
-exams pressure and they expected you could do your best. I wish the bests for you all just our
-volleyball team had the best performance
+
+Iran is very well played against Argentina but had the worst performance against Bosnia.
+Againsta team that no one could believe to lose, students had been in the worst situation because of their
+exams pressure and they expected you could do your best. 
+I wish the bests for you all just our volleyball team had the best performance
+
 The overall result calculated by SentiMarker4 is +6 point.
-To see how this result is achieved, POS tags and grouping outputs and finally assigned weights
-should be analyzed.
-POS tagging output is as following:‫‪|N‬ایران‬ ‫‪|N‬دربازی‬ ‫‪|PO‬با‬ ‫‪|N‬ارزانتین‬ ‫‪|ADV‬خیلی‬ ‫‪|ADJ‬خوب‬ ‫‪|V_PA‬درخشید‬
+
+To see how this result is achieved, POS tags and grouping outputs and finally assigned weights should be analyzed.
+
+POS tagging output is as following:
+```
+‫‪|N‬ایران‬ ‫‪|N‬دربازی‬ ‫‪|PO‬با‬ ‫‪|N‬ارزانتین‬ ‫‪|ADV‬خیلی‬ ‫‪|ADJ‬خوب‬ ‫‪|V_PA‬درخشید‬
 ‫)‪2‬‬
 ‫‪|CON‬ولی‬ ‫‪|PO‬در‬ ‫‪|N‬مقابل‬ ‫‪|N‬بوسنی‬ ‫‪|ADJ‬بد‬ ‫‪|ADJ_SAZ_PA‬ترین‬ ‫‪|N‬بازی‬ ‫‪|PO‬رو‬ ‫‪|V_PA‬داشت‬
 ‫‪|PO‬در‬ ‫‪|N‬مقابل‬ ‫‪|N‬تیمی‬ ‫‪|CON‬کھ‬ ‫‪|ADV‬اصلا‬ ‫‪|N‬ھیچ‬ ‫‪|N‬کس‬ ‫‪|ADJ‬باور‬ ‫‪|V_PA‬نمیکرد‬
@@ -251,10 +265,13 @@ POS tagging output is as following:‫‪|N‬ایران‬ ‫‪|N‬دربا�
 ‫‪|ADV‬فقط‬
 ‫)‪8‬‬
 ‫‪|ADV‬فقط‬
-‫)‪9‬‬In the given output, sentences have been separated based on verbs. ADJ_SAZ_PA that indicates
-compound adjective has been detected very well and at the next steps they will be joined to
-create normalized output.
+‫)‪9‬‬
+```
+In the given output, sentences have been separated based on verbs. 
+`ADJ_SAZ_PA` that indicates compound adjective has been detected very well and at the next steps they will be joined to create normalized output.
+
 Next in the grouping stage, we have:
+```
 V_PA[‫(]درخشید‬ADV[‫(]خیلی‬ADJ(‫))خوب‬N[‫)(]ارزانتین‬N[‫)(]دربازی‬N[‫))(]ایران‬
 V_PA[‫(]داشت‬CON[‫(]ولی‬N[‫)(]مقابل‬N[‫)(]بوسنی‬ADJ[ ‫ترین‬ ‫بد‬ ]()N[‫)))(]بازی‬
 V_PA[‫(]نمیکرد‬CON[‫(]کھ‬ADV[‫(]اصلا‬ADJ(‫))باور‬N[‫)(]ھیچ‬N[‫))(]کس‬N[‫)(]تیمی‬N[‫))(]مقابل‬
@@ -268,10 +285,15 @@ ADV[‫)(]فقط‬
 ADV[‫)(]فقط‬
 ADV[‫)(]فقط‬
 ADJ[‫)(]والیبالی‬N[‫)(]سلامتیشون‬
-Compound adjectives have been joined together ( ‫ترین‬ ‫بد‬ -> ‫)بدترین‬.
+```
+Compound adjectives have been joined together
+```
+( ‫ترین‬ ‫بد‬ -> ‫)بدترین‬.
+```
 Also names and prepositions have been removed due to the subjective nature of them.
-Then weighting phase with the help of sentiment dictionary is as following: (10000 means could
-not find proper score for the given word. They will be ineffective in the final calculations)
+Then weighting phase with the help of sentiment dictionary is as following: 
+(10000 means couldnot find proper score for the given word. They will be ineffective in the final calculations)
+```
 V_PA[1]*(ADV[2]*(ADJ[2]+)=4+N[10000]+()=10000+N[10000]+()=10000+N[10000]+()=100
 00+)=4+V_PA[10000]*(CON[10000]*(N[10000]+()=10000+N[10000]+()=10000+ADJ[-4]+()=-
 4+N[10000]+()=10000+)=-4+)=-4+
@@ -290,33 +312,41 @@ ADV[10000]*()=10000+
 ADV[10000]*()=10000+
 ADV[10000]*()=10000+
 ADJ[10000]+()=10000+N[10000]+()=10000+
+```
 First statement of the comment admires previous Iran and Argentina game:
+```
 V_PA[1]*(ADV[2]*(ADJ[2]+)=4+N[10000]+()=10000+N[10000]+()=10000+N[10000]+()=100
 00+)=4+
+```
 Next statement complains the next game result with Bosnia.
+```
 V_PA[10000]*(CON[10000]*(N[10000]+()=10000+N[10000]+()=10000+ADJ[-4]+()=-
 4+N[10000]+()=10000+)=-4+)=-4+
+```
 The overall sentiment score for these two sentences will be calculated as 0.
 In the next phrase, author is deeply wondering how Iran team lost the game to Bosnia.1)
-V_PA[-
-1]*(CON[10000]*(ADV[2]*(ADJ[2]+)=4+N[10000]+()=10000+N[10000]+()=10000+)=4+N[10
-000]+()=10000+N[10000]+()=10000+)=-4+
-2)
-V_PR[-1]*(N[10000]+()=10000+)=-1+
+```
+V_PA[-1]*(CON[10000]*(ADV[2]*(ADJ[2]+)=4+N[10000]+()=10000+N[10000]+()=10000+)=4+N[10000]+()=10000+N[10000]+()=10000+)=-4+2)V_PR[-1]*(N[10000]+()=10000+)=-1+
+```
 As you noticed, the whole sentence has been divided into separate parts for calculation and this
-is the benefit of separating sentences based on verbs. If it was not, the overall score would be
-calculated as +4 due to multiplying by -1.
+is the benefit of separating sentences based on verbs. 
+If it was not, the overall score would be calculated as +4 due to multiplying by -1.
+
 For the next phrase, the author is complaining how it was hard for students to schedule they
 school programs and manage their exams to due to their attentions to the competitions.
+```
 V_PA[10000]*(N[10000]+()=10000+ADJ[10000]+()=10000+ADJ[10000]+()=10000+N[10000]
 +()=10000+N[10000]+()=10000+N[10000]+()=10000+N[10000]+()=10000+N[10000]+()=1000
 0+)=10000+
+```
 As you’ve noticed, it is calculated as neutral while it should not be. It is because it could not find
-the score of “ ‫ترین‬ ‫سخت‬ ” in the sentiment dictionary. By extending sentiment dictionary to cover
-more objective words, this kind of errors will be solved.
+the score of “‫ترین‬ ‫سخت‬” in the sentiment dictionary. 
+By extending sentiment dictionary to cover more objective words, this kind of errors will be solved.
 In the next sentence, a misspelled word caused some wrong POS tagging. Also hopefully for this
 statement it was not so objective, but using a proper spell checker tool, this kind of errors can be
 reduced to minimum.
+```
 ‫|زیرا‬N ‫|برنامھ‬N ‫|امتحانی‬ADJ ‫|ما‬PRO ‫|فشرده‬ADJ ‫|بود‬V_PA
+```
 Finally author ends comment by wishing future success for players.
 Final score for this comment calculated as -2.
